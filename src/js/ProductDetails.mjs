@@ -60,3 +60,4 @@ function productDetailsTemplate(product) {
   document.getElementById("addToCart").dataset.id = product.Id || "";
 }
 
+//test
