@@ -9,8 +9,10 @@ export default class ProductDetails {
   }
 
   async init() {
+    console.log("Looking for productId:", this.productId);
     // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log("Product found:", this.product);
     // the product details are needed before rendering the HTML
     this.renderProductDetails();
     // once the HTML is rendered, add a listener to the Add to Cart button
@@ -32,17 +34,29 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
-  document.querySelector("h2").textContent = product.Brand.Name;
-  document.querySelector("h3").textContent = product.NameWithoutBrand;
+  if (!product) {
+    document.querySelector("h2").textContent = "Product Not Found";
+    document.querySelector("h3").textContent = "";
+    document.getElementById("productImage").src = "../images/camping-products.jpg";
+    document.getElementById("productImage").alt = "No product";
+    document.getElementById("productPrice").textContent = "";
+    document.getElementById("productColor").textContent = "";
+    document.getElementById("productDesc").innerHTML = "Sorry, we couldn't find that product.";
+    document.getElementById("addToCart").disabled = true;
+    return;
+  }
+
+  document.querySelector("h2").textContent = product.Brand?.Name || "Brand";
+  document.querySelector("h3").textContent = product.NameWithoutBrand || "Product";
 
   const productImage = document.getElementById("productImage");
-  productImage.src = product.Image;
-  productImage.alt = product.NameWithoutBrand;
+  productImage.src = product.Image || "../images/camping-products.jpg";
+  productImage.alt = product.NameWithoutBrand || "Product";
 
-  document.getElementById("productPrice").textContent = product.FinalPrice;
-  document.getElementById("productColor").textContent = product.Colors[0].ColorName;
-  document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
+  document.getElementById("productPrice").textContent = product.FinalPrice || "";
+  document.getElementById("productColor").textContent = product.Colors?.[0]?.ColorName || "";
+  document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple || "";
 
-  document.getElementById("addToCart").dataset.id = product.Id;
+  document.getElementById("addToCart").dataset.id = product.Id || "";
 }
 
