@@ -32,7 +32,10 @@ function showCartTotal() {
 
   if (cart.length > 0) {
     // Calculate total
-    const total = cart.reduce((sum, item) => sum + Number(item.FinalPrice || 0), 0);
+    const total = cart.reduce(
+      (sum, item) => sum + Number(item.FinalPrice || 0),
+      0,
+    );
     cartTotal.textContent = `Total: $${total.toFixed(2)}`;
     cartFooter.classList.remove("hide");
   } else {
