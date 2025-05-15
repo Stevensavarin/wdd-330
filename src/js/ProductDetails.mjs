@@ -43,7 +43,7 @@ function productDetailsTemplate(product) {
     document.getElementById("productColor").textContent = "";
     document.getElementById("productDesc").innerHTML = "Sorry, we couldn't find that product.";
     document.getElementById("addToCart").disabled = true;
-    return;
+    return; 
   }
 
   document.querySelector("h2").textContent = product.Brand?.Name || "Brand";
