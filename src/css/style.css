@@ -261,3 +261,13 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.cart-footer.hide {
+  display: none;
+}
+.cart-footer {
+  margin-top: 1em;
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+}
