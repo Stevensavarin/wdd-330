@@ -25,4 +25,23 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+function showCartTotal() {
+  const cart = getLocalStorage("so-cart") || [];
+  const cartFooter = document.querySelector(".cart-footer");
+  const cartTotal = document.querySelector(".cart-total");
+
+  if (cart.length > 0) {
+    // Calculate total
+    const total = cart.reduce(
+      (sum, item) => sum + Number(item.FinalPrice || 0),
+      0,
+    );
+    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    cartFooter.classList.remove("hide");
+  } else {
+    cartFooter.classList.add("hide");
+  }
+}
+
 renderCartContents();
+showCartTotal();
