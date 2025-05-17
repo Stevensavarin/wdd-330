@@ -1,7 +1,21 @@
 import { getLocalStorage } from "./utils.mjs";
 
-function renderCartContents() {
+//Empty Card Error: cart.html - steven savarin
+
+/*function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+}*/
+
+function renderCartContents() {
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  if (cartItems.length === 0) {
+    document.querySelector(".product-list").innerHTML = "<p>Tu carrito está vacío.</p>";
+    return;
+  }
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
