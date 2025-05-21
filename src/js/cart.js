@@ -1,7 +1,10 @@
 import { loadHeaderFooter } from "./utils.mjs";
+import { updateCartCount } from "./utils.mjs";
 import { getLocalStorage } from "./utils.mjs";
 
-loadHeaderFooter();
+loadHeaderFooter().then(() => {
+    updateCartCount();
+});
 
 //Empty Card Error: cart.html - steven savarin
 

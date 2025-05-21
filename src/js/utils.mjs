@@ -61,3 +61,11 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+    const countIcon = document.querySelector(".item-count");
+    if (countIcon) {
+        countIcon.textContent = cart.length;
+    }
+}
