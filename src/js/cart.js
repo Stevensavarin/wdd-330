@@ -1,4 +1,7 @@
+import { loadHeaderFooter } from "./utils.mjs";
 import { getLocalStorage } from "./utils.mjs";
+
+loadHeaderFooter();
 
 //Empty Card Error: cart.html - steven savarin
 
