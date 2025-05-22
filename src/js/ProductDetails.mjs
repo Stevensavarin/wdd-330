@@ -22,6 +22,10 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
+    // Always use PrimaryMedium for cart images as per assignment
+    if (this.product.Images && this.product.Images.PrimaryMedium) {
+      this.product.Image = this.product.Images.PrimaryMedium;
+    }
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
   }
