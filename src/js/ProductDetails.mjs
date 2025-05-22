@@ -1,5 +1,7 @@
 import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
+import { formatPriceEUR } from "./currencyUtils.mjs"; // steven savarin
+
 export default class ProductDetails {
 
   constructor(productId, dataSource) {
@@ -48,16 +50,38 @@ function productDetailsTemplate(product) {
   productImage.src = imageUrl;
   productImage.alt = product.NameWithoutBrand;
 
-  const euroPrice = new Intl.NumberFormat('de-DE',
-    {
-      style: 'currency', currency: 'EUR',
-    }).format(Number(product.FinalPrice) * 0.85);
-  document.querySelector("#productPrice").textContent = `${euroPrice}`;
+  // Show consistent prices
+  const priceContainer = document.querySelector("#productPrice"); //Steven Savarin W03
+  priceContainer.innerHTML = ""; // Clean
+
+  const priceWrapper = document.createElement("div");
+  priceWrapper.classList.add("price-wrapper");
+
+  const finalPriceEl = document.createElement("span");
+  finalPriceEl.classList.add("final-price");
+  finalPriceEl.textContent = formatPriceEUR(product.FinalPrice);
+  priceWrapper.appendChild(finalPriceEl);
+
+  if (product.SuggestedRetailPrice > product.FinalPrice) {
+    const originalPriceEl = document.createElement("span");
+    originalPriceEl.classList.add("original-price");
+    originalPriceEl.textContent = formatPriceEUR(product.SuggestedRetailPrice);
+    priceWrapper.appendChild(originalPriceEl);
+
+    const discount = Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100);
+    const discountEl = document.createElement("div");
+    discountEl.classList.add("discount-tag");
+    discountEl.textContent = `-${discount}% OFF`;
+    priceWrapper.appendChild(discountEl);
+  }
+
+  priceContainer.appendChild(priceWrapper);
+
   document.querySelector("#productColor").textContent = product.Colors?.[0]?.ColorName || "";
   document.querySelector("#productDesc").innerHTML = product.DescriptionHtmlSimple;
 
   document.querySelector("#addToCart").dataset.id = product.Id;
-}
+} //Steven Savarin W03
 
 // ************* Alternative Display Product Details Method *******************
 // function productDetailsTemplate(product) {
