@@ -7,6 +7,14 @@ loadHeaderFooter().then(() => {
 });
 
 const category = getParam('category');
+
+// Capitalize the first letter and replace hyphens with spaces for display
+const displayCategory = category
+  ? category.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+  : '';
+
+document.querySelector('.title.highlight').textContent = displayCategory;
+
 // first create an instance of the ProductData class.
 const dataSource = new ProductData();
 // then get the element you want the product list to render in
