@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -192,7 +192,6 @@ button {
 .product-grid img {
   width: min(100px, 90%);
 }
-
 
 .products {
   margin-top: 2rem;
