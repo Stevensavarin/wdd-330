@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -22,8 +22,13 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
+    // Always use PrimaryMedium for cart images as per assignment
+    if (this.product.Images && this.product.Images.PrimaryMedium) {
+      this.product.Image = this.product.Images.PrimaryMedium;
+    }
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+    updateCartCount();
   }
 
   renderProductDetails() {
@@ -32,18 +37,26 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
-  document.querySelector('h2').textContent = product.Brand.Name;
-  document.querySelector('h3').textContent = product.NameWithoutBrand;
+  document.querySelector("#p-brand").textContent = product.Brand.Name;
+  document.querySelector("#p-name").textContent = product.NameWithoutBrand;
 
-  const productImage = document.getElementById('productImage');
-  productImage.src = product.Image;
+  const productImage = document.querySelector("#productImage");
+  let imageUrl = product.Images?.PrimaryExtraLarge || product.Image;
+  if (imageUrl && !imageUrl.startsWith("http")) {
+    imageUrl = import.meta.env.VITE_SERVER_URL + imageUrl;
+  }
+  productImage.src = imageUrl;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById('productPrice').textContent = product.FinalPrice;
-  document.getElementById('productColor').textContent = product.Colors[0].ColorName;
-  document.getElementById('productDesc').innerHTML = product.DescriptionHtmlSimple;
+  const euroPrice = new Intl.NumberFormat('de-DE',
+    {
+      style: 'currency', currency: 'EUR',
+    }).format(Number(product.FinalPrice) * 0.85);
+  document.querySelector("#productPrice").textContent = `${euroPrice}`;
+  document.querySelector("#productColor").textContent = product.Colors?.[0]?.ColorName || "";
+  document.querySelector("#productDesc").innerHTML = product.DescriptionHtmlSimple;
 
-  document.getElementById('addToCart').dataset.id = product.Id;
+  document.querySelector("#addToCart").dataset.id = product.Id;
 }
 
 // ************* Alternative Display Product Details Method *******************
