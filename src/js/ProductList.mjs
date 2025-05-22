@@ -1,17 +1,30 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
-function productCardTemplate(product) {
+import { formatPriceEUR } from "./currencyUtils.mjs"; //Steven Savarin W03
+
+function productCardTemplate(product) { //Steven Savarin W03
+  const hasDiscount = product.SuggestedRetailPrice > product.FinalPrice;
+  const finalPrice = formatPriceEUR(product.FinalPrice);
+  const originalPrice = hasDiscount ? formatPriceEUR(product.SuggestedRetailPrice) : "";
+  const discountPercent = hasDiscount
+    ? Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100)
+    : null;
+
   return `
     <li class="product-card">
       <a href="/product_pages/?product=${product.Id}">
         <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h3>${product.Brand.Name}</h3>
         <p>${product.NameWithoutBrand}</p>
-        <p class="product-card__price">$${product.FinalPrice}</p>
+        <div class="price-info">
+          <span class="product-card__price">${finalPrice}</span>
+          ${hasDiscount ? `<span class="product-card__original-price">${originalPrice}</span>` : ""}
+        </div>
+        ${hasDiscount ? `<div class="product-card__discount">-${discountPercent}% OFF</div>` : ""}
       </a>
     </li>
-    `;
-}
+  `;
+} //Steven Savarin W03
 
 export default class ProductList {
   constructor(category, dataSource, listElement) {

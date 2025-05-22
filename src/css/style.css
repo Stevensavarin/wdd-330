@@ -210,6 +210,42 @@ button {
   color: var(--dark-grey);
 }
 
+.price-wrapper { /*Steven Savarin W03*/
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+/* Final price highlighted large and clear */
+.final-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222222;
+}
+
+/* Original price crossed out, smaller and greyed out */
+.original-price {
+  font-size: 1.1rem;
+  color: #999999;
+  text-decoration: line-through;
+  padding-left: 4px;
+}
+
+/* Badge type discount label */
+.discount-tag {
+  background-color: #ff5252;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(255, 82, 82, 0.4);
+  user-select: none;
+  white-space: nowrap;
+}  /*Steven Savarin W03*/
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -232,6 +268,36 @@ button {
 .card__name {
   font-size: 1em;
 }
+
+.product-card__price { /*Steven Savarin W03*/
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222222;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+/* Original price crossed out in list */
+.product-card__original-price {
+  font-size: 1rem;
+  color: #999999;
+  text-decoration: line-through;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+/* Discount label in list */
+.product-card__discount {
+  background-color: #ff5252;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 2px 8px;
+  border-radius: 16px;
+  margin-top: 6px;
+  display: inline-block;
+  user-select: none;
+} /*Steven Savarin W03*/
 
 /* End product list card */
 
