@@ -104,7 +104,8 @@ function showCartTotal() { //Steven Savarin W03
   const cartTotal = document.querySelector(".cart-total");
 
   if (cart.length > 0) {
-    const total = cart.reduce((sum, item) => sum + Number(item.FinalPrice), 0);
+    //multiplying price by quantity for each item
+    const total = cart.reduce((sum, item) => sum + Number(item.FinalPrice) * (item.quantity || 1), 0);
     cartTotal.textContent = `Total: ${formatPriceEUR(total)}`;
     cartFooter.classList.remove("hide");
   } else {
