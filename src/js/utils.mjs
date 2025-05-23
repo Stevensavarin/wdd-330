@@ -38,3 +38,34 @@ export function renderListWithTemplate(template, parentElement, list, position =
 }
 
 
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if(callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+}
+
+export function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+    const countIcon = document.querySelector(".item-count");
+    if (countIcon) {
+        countIcon.textContent = cart.length;
+    }
+}
