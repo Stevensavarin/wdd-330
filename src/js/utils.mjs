@@ -66,6 +66,8 @@ export function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
     const countIcon = document.querySelector(".item-count");
     if (countIcon) {
-        countIcon.textContent = cart.length;
+        //sum up the quantity of each item in the list
+        const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        countIcon.textContent = totalCount;
     }
 }

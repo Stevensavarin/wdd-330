@@ -210,6 +210,54 @@ button {
   color: var(--dark-grey);
 }
 
+.cart-page .product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cart-page .cart-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 1em 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cart-page .cart-card button.increment,
+.cart-page .cart-card button.decrement {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  background: #eee;
+  color: #333;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-page .cart-card button.increment:hover,
+.cart-page .cart-card button.decrement:hover {
+  background: #ccc;
+  border-color: #888;
+}
+
 .price-wrapper { /*Steven Savarin W03*/
   display: flex;
   align-items: baseline;
