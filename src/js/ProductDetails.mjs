@@ -24,11 +24,17 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
-    // Always use PrimaryMedium for cart images as per assignment
-    if (this.product.Images && this.product.Images.PrimaryMedium) {
-      this.product.Image = this.product.Images.PrimaryMedium;
+    const existing = cartItems.find(item => item.Id === this.product.Id);
+    if (existing) {
+      existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+      // Always use PrimaryMedium for cart images as per assignment
+      if (this.product.Images && this.product.Images.PrimaryMedium) {
+        this.product.Image = this.product.Images.PrimaryMedium;
+      }
+      this.product.quantity = 1;
+      cartItems.push(this.product);
     }
-    cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
     updateCartCount();
   }
