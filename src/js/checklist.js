@@ -23,7 +23,7 @@ function addItem() {
   // Create checkbox
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
-  checkbox.addEventListener("change", function() {
+  checkbox.addEventListener("change", function () {
     toggleItem(checkbox);
   });
 
@@ -35,7 +35,7 @@ function addItem() {
   const button = document.createElement("button");
   button.className = "remove";
   button.textContent = "❌";
-  button.addEventListener("click", function() {
+  button.addEventListener("click", function () {
     removeItem(button);
   });
 
@@ -82,7 +82,7 @@ function loadChecklist() {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = checked;
-    checkbox.addEventListener("change", function() {
+    checkbox.addEventListener("change", function () {
       toggleItem(checkbox);
     });
 
@@ -94,7 +94,7 @@ function loadChecklist() {
     const button = document.createElement("button");
     button.className = "remove";
     button.textContent = "❌";
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
       removeItem(button);
     });
 
