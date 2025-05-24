@@ -484,11 +484,11 @@ footer {
 .navbar-search button {
   background: var(--primary-color);
   border: none;
-  border-radius: 50%;
+  border-radius: 10%;
   width: 32px;
-  height: 32px;
+  height: 36px;
   cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
