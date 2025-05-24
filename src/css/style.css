@@ -454,11 +454,22 @@ footer {
 }
 
 /*Product Search*/
+#searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px auto 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
 .navbar-search {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 16px;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  margin-left: 0;
 }
 
 .navbar-search input[type="text"] {
@@ -466,6 +477,8 @@ footer {
   border-radius: 16px;
   border: 1px solid var(--light-grey);
   font-size: 1em;
+  width: 800px;
+  max-width: 100%;
 }
 
 .navbar-search button {
