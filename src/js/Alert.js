@@ -1,5 +1,6 @@
-export default class Alert { //Steven Savarin W03
-  constructor(jsonPath = './alerts.json') {
+export default class Alert {
+  //Steven Savarin W03
+  constructor(jsonPath = "./alerts.json") {
     this.jsonPath = jsonPath;
     this.alerts = [];
     this.currentIndex = 0;
@@ -16,18 +17,18 @@ export default class Alert { //Steven Savarin W03
         setInterval(() => this.showAlert(), 1500);
       }
     } catch (err) {
-      console.error('Failed to load alerts:', err);
+      console.error("Failed to load alerts:", err);
     }
   }
 
   buildContainer() {
-    this.container = document.createElement('section');
-    this.container.className = 'alert-list';
-    this.alertElement = document.createElement('p');
-    this.alertElement.className = 'alert-message';
+    this.container = document.createElement("section");
+    this.container.className = "alert-list";
+    this.alertElement = document.createElement("p");
+    this.alertElement.className = "alert-message";
     this.container.appendChild(this.alertElement);
 
-    const main = document.querySelector('main');
+    const main = document.querySelector("main");
     if (main) {
       main.prepend(this.container);
     }
@@ -43,4 +44,3 @@ export default class Alert { //Steven Savarin W03
   }
 }
 //Steven Savarin W03
-

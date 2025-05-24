@@ -127,7 +127,8 @@ button {
   width: 25px;
 }
 
-.cart:hover svg {
+.cart-icon:hover svg,
+.cart-icon:focus svg {
   fill: gray;
 }
 
@@ -243,7 +244,9 @@ button {
   font-weight: bold;
   margin: 0 2px;
   cursor: pointer;
-  transition: background 0.2s, border 0.2s;
+  transition:
+    background 0.2s,
+    border 0.2s;
   box-sizing: border-box;
   padding: 0;
   line-height: 1;
@@ -258,7 +261,8 @@ button {
   border-color: #888;
 }
 
-.price-wrapper { /*Steven Savarin W03*/
+.price-wrapper {
+  /*Steven Savarin W03*/
   display: flex;
   align-items: baseline;
   gap: 12px;
@@ -292,7 +296,7 @@ button {
   box-shadow: 0 2px 6px rgba(255, 82, 82, 0.4);
   user-select: none;
   white-space: nowrap;
-}  /*Steven Savarin W03*/
+} /*Steven Savarin W03*/
 
 /* Styles for product lists */
 .product-card {
@@ -317,7 +321,8 @@ button {
   font-size: 1em;
 }
 
-.product-card__price { /*Steven Savarin W03*/
+.product-card__price {
+  /*Steven Savarin W03*/
   font-size: 1.2rem;
   font-weight: 700;
   color: #222222;
@@ -367,7 +372,6 @@ button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 } /*Steven Savarin W03*/
 
-
 /* End product list card */
 
 .product-detail {
@@ -385,7 +389,6 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
-  /* max-height: 120px; */
   align-items: center;
 }
 
@@ -448,4 +451,51 @@ footer {
   text-align: right;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+/*Product Search*/
+#searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px auto 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  margin-left: 0;
+}
+
+.navbar-search input[type="text"] {
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--light-grey);
+  font-size: 1em;
+  width: 800px;
+  max-width: 100%;
+}
+
+.navbar-search button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.navbar-search button:hover {
+  background: var(--tertiary-color);
+  color: #fff;
 }

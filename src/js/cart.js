@@ -3,7 +3,6 @@ import { setLocalStorage, getLocalStorage, updateCartCount } from "./utils.mjs";
 
 import { formatPriceEUR } from "./currencyUtils.mjs"; // steven savarin
 
-
 loadHeaderFooter().then(() => {
   updateCartCount();
 });
@@ -29,43 +28,46 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
   //remove listener
-  document.querySelectorAll(".remove-item").forEach(btn => {
-    btn.addEventListener("click", function() {
+  document.querySelectorAll(".remove-item").forEach((btn) => {
+    btn.addEventListener("click", function () {
       removeFromCart(this.dataset.id);
     });
   });
 
   //increase/decrease listeners
-  document.querySelectorAll(".increment").forEach(btn => {
-    btn.addEventListener("click", function() {
+  document.querySelectorAll(".increment").forEach((btn) => {
+    btn.addEventListener("click", function () {
       changeQuantity(this.dataset.id, 1);
     });
   });
-  document.querySelectorAll(".decrement").forEach(btn => {
-    btn.addEventListener("click", function() {
+  document.querySelectorAll(".decrement").forEach((btn) => {
+    btn.addEventListener("click", function () {
       changeQuantity(this.dataset.id, -1);
     });
   });
 }
 
-function cartItemTemplate(item) { //Steven Savarin W03
+function cartItemTemplate(item) {
+  //Steven Savarin W03
   let imageUrl = item.Image;
   if (imageUrl && !imageUrl.startsWith("http")) {
     imageUrl = import.meta.env.VITE_SERVER_URL + imageUrl;
   }
 
   const finalPrice = Number(item.FinalPrice) * (item.quantity || 1);
-  const suggestedPrice = Number(item.SuggestedRetailPrice) * (item.quantity || 1);
+  const suggestedPrice =
+    Number(item.SuggestedRetailPrice) * (item.quantity || 1);
 
   const formattedFinalPrice = formatPriceEUR(finalPrice);
   const formattedSuggestedPrice = formatPriceEUR(suggestedPrice);
 
-  const isDiscounted = Number(item.SuggestedRetailPrice) > Number(item.FinalPrice);
+  const isDiscounted =
+    Number(item.SuggestedRetailPrice) > Number(item.FinalPrice);
   const discountPercent = isDiscounted
     ? Math.round(
         ((Number(item.SuggestedRetailPrice) - Number(item.FinalPrice)) /
           Number(item.SuggestedRetailPrice)) *
-          100
+          100,
       )
     : 0;
 
@@ -98,14 +100,18 @@ function cartItemTemplate(item) { //Steven Savarin W03
 } //Steven Savarin W03
 
 // Show cart total in EUR and formatted
-function showCartTotal() { //Steven Savarin W03
+function showCartTotal() {
+  //Steven Savarin W03
   const cart = getLocalStorage("so-cart") || [];
   const cartFooter = document.querySelector(".cart-footer");
   const cartTotal = document.querySelector(".cart-total");
 
   if (cart.length > 0) {
     //multiplying price by quantity for each item
-    const total = cart.reduce((sum, item) => sum + Number(item.FinalPrice) * (item.quantity || 1), 0);
+    const total = cart.reduce(
+      (sum, item) => sum + Number(item.FinalPrice) * (item.quantity || 1),
+      0,
+    );
     cartTotal.textContent = `Total: ${formatPriceEUR(total)}`;
     cartFooter.classList.remove("hide");
   } else {
@@ -118,7 +124,7 @@ showCartTotal();
 
 function removeFromCart(id) {
   let cart = getLocalStorage("so-cart") || [];
-  cart = cart.filter(item => item.Id !== id);
+  cart = cart.filter((item) => item.Id !== id);
   setLocalStorage("so-cart", cart);
   renderCartContents();
   showCartTotal();
@@ -127,7 +133,7 @@ function removeFromCart(id) {
 
 function changeQuantity(id, quantityChange) {
   let cart = getLocalStorage("so-cart") || [];
-  cart = cart.map(item => {
+  cart = cart.map((item) => {
     if (item.Id === id) {
       let newQty = (item.quantity || 1) + quantityChange;
       if (newQty < 1) newQty = 1;
