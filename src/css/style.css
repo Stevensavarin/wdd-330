@@ -428,3 +428,65 @@ footer {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+
+/*Styling of checklist (migrated to main css file by tvp*/
+#itemInput {
+  padding: 10px;
+  width: 70%;
+  border: 1px solid var(--dark-grey);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#checklistButton{
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#checklistButton:hover {
+  background-color: var(--tertiary-color);
+}
+
+#checklist{
+  list-style: none;
+  padding: 0;
+}
+
+#checklist li {
+  background-color: white;
+  color: var(--dark-grey);
+  font-size: 18px;
+  padding: 10px;
+  margin: 5px auto;
+  width: 80%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#checklist li input[type="checkbox"] {
+  transform: scale(1.3);
+  margin-right: 10px;
+}
+
+#checklist li button.remove {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#checklist li button.remove:hover {
+  background-color: var(--tertiary-color);
+}

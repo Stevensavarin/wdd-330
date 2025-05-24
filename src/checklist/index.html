@@ -1,0 +1,26 @@
+<!--Made by M.Andrew, slightly fixed by Tymur V. Pushnoy-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camping Checklist</title>
+    <!--tvp fix: changed css file to the main one, because we need the same overall styling and header/footer-->
+    <link rel="stylesheet" href="/css/style.css" />
+    <!--tvp fix: type of module-->
+    <script type="module" src="/js/checklist.js"></script>
+  </head>
+  <body>
+    <!--tvp fix: dynamic header-->
+    <header id="main-header"></header>
+
+    <h2>Camping Checklist</h2>
+    <input type="text" id="itemInput" placeholder="Enter an item" />
+    <button id="checklistButton" onclick="addItem()">Add Item</button>
+
+    <ul id="checklist"></ul>
+
+    <!--tvp fix: dynamic footer-->
+    <footer id="main-footer"></footer>
+  </body>
+</html>

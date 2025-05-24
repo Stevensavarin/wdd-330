@@ -1,3 +1,13 @@
+//Made by M.Andrew, slightly fixed by Tymur V. Pushnoy
+
+//tvp fix: dynamic header/footer
+import { loadHeaderFooter } from "./utils.mjs";
+import { updateCartCount } from "./utils.mjs";
+
+loadHeaderFooter().then(() => {
+  updateCartCount();
+});
+
 document.addEventListener("DOMContentLoaded", loadChecklist);
 
 function addItem() {
@@ -43,7 +53,7 @@ function loadChecklist() {
     const checklist = document.getElementById("checklist");
     const li = document.createElement("li");
     li.innerHTML = `<input type="checkbox" ${checked ? "checked" : ""} onclick="toggleItem(this)"> ${text} 
-                        <button onclick="removeItem(this)">❌</button>`;
+  <button class="remove" onclick="removeItem(this)">❌</button>`;
     li.style.textDecoration = checked ? "line-through" : "none";
     checklist.appendChild(li);
   });
