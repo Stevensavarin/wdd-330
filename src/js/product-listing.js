@@ -6,20 +6,27 @@ loadHeaderFooter().then(() => {
   updateCartCount();
 });
 
+const searchQuery = getParam("search");
 const category = getParam("category");
 
-// Capitalize the first letter and replace hyphens with spaces for display
-const displayCategory = category
-  ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-  : "";
-
-document.querySelector(".title.highlight").textContent = displayCategory;
-
-// first create an instance of the ProductData class.
 const dataSource = new ProductData();
-// then get the element you want the product list to render in
 const listElement = document.querySelector(".product-list");
-// then create an instance of the ProductList class and send it the correct information.
-const myList = new ProductList(category, dataSource, listElement);
-// finally call the init method to show the products
-myList.init();
+
+if (searchQuery) {
+  // If searching, fetch search results from API
+  dataSource.searchProducts(searchQuery).then((results) => {
+    // Render results using your existing template
+    const myList = new ProductList(null, dataSource, listElement);
+    myList.renderList(results);
+    document.querySelector(".title.highlight").textContent =
+      `Results for "${searchQuery}"`;
+  });
+} else if (category) {
+  // Existing category logic
+  const displayCategory = category
+    ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "";
+  document.querySelector(".title.highlight").textContent = displayCategory;
+  const myList = new ProductList(category, dataSource, listElement);
+  myList.init();
+}
