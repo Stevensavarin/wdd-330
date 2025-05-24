@@ -30,6 +30,7 @@ function sortProducts(products, sortBy) {
 function handleSortChange() {
   const selected = sortSelect.value;
   const sortedList = sortProducts(currentList, selected);
+  listElement.innerHTML = "";
   const myList = new ProductList(null, dataSource, listElement);
   myList.renderList(sortedList);
 }
