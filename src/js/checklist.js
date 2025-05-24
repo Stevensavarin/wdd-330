@@ -10,6 +10,8 @@ loadHeaderFooter().then(() => {
 
 document.addEventListener("DOMContentLoaded", loadChecklist);
 
+document.getElementById("checklistButton").addEventListener("click", addItem);
+
 function addItem() {
   const itemInput = document.getElementById("itemInput");
   const itemText = itemInput.value.trim();
@@ -17,8 +19,29 @@ function addItem() {
 
   const checklist = document.getElementById("checklist");
   const li = document.createElement("li");
-  li.innerHTML = `<input type="checkbox" onclick="toggleItem(this)"> ${itemText} 
-                    <button onclick="removeItem(this)">❌</button>`;
+
+  // Create checkbox
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.addEventListener("change", function() {
+    toggleItem(checkbox);
+  });
+
+  // Create span for text
+  const span = document.createElement("span");
+  span.textContent = itemText;
+
+  // Create remove button
+  const button = document.createElement("button");
+  button.className = "remove";
+  button.textContent = "❌";
+  button.addEventListener("click", function() {
+    removeItem(button);
+  });
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(button);
   checklist.appendChild(li);
 
   saveChecklist();
@@ -26,9 +49,11 @@ function addItem() {
 }
 
 function toggleItem(checkbox) {
-  checkbox.parentElement.style.textDecoration = checkbox.checked
-    ? "line-through"
-    : "none";
+  //find the span sibling (the task text)
+  const span = checkbox.nextElementSibling;
+  if (span) {
+    span.style.textDecoration = checkbox.checked ? "line-through" : "none";
+  }
   saveChecklist();
 }
 
@@ -52,9 +77,31 @@ function loadChecklist() {
   savedItems.forEach(({ text, checked }) => {
     const checklist = document.getElementById("checklist");
     const li = document.createElement("li");
-    li.innerHTML = `<input type="checkbox" ${checked ? "checked" : ""} onclick="toggleItem(this)"> ${text} 
-  <button class="remove" onclick="removeItem(this)">❌</button>`;
-    li.style.textDecoration = checked ? "line-through" : "none";
+
+    // Create checkbox
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = checked;
+    checkbox.addEventListener("change", function() {
+      toggleItem(checkbox);
+    });
+
+    // Create span for text
+    const span = document.createElement("span");
+    span.textContent = text;
+
+    // Create remove button
+    const button = document.createElement("button");
+    button.className = "remove";
+    button.textContent = "❌";
+    button.addEventListener("click", function() {
+      removeItem(button);
+    });
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(button);
+    span.style.textDecoration = checked ? "line-through" : "none";
     checklist.appendChild(li);
   });
 }

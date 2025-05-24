@@ -11,16 +11,20 @@
     <script type="module" src="/js/checklist.js"></script>
   </head>
   <body>
-    <!--tvp fix: dynamic header-->
     <header id="main-header"></header>
 
-    <h2>Camping Checklist</h2>
-    <input type="text" id="itemInput" placeholder="Enter an item" />
-    <button id="checklistButton" onclick="addItem()">Add Item</button>
+    <!--tvp fix: restructure for better styling-->
+    <div class="checklist-bg">
+      <h2>Camping Checklist</h2>
+      <div class="checklist-input-row">
+        <input type="text" id="itemInput" placeholder="Enter an item" />
+        <!--tvp fix: removed inline OnClick-->
+        <button id="checklistButton">Add Item</button>
+      </div>
+      <ul id="checklist"></ul>
+    </div>
 
-    <ul id="checklist"></ul>
-
-    <!--tvp fix: dynamic footer-->
+    <div class="divider"></div>
     <footer id="main-footer"></footer>
   </body>
 </html>

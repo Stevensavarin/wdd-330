@@ -127,7 +127,8 @@ button {
   width: 25px;
 }
 
-.cart:hover svg {
+.cart-icon:hover svg,
+.cart-icon:focus svg {
   fill: gray;
 }
 
@@ -364,7 +365,6 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
-  /* max-height: 120px; */
   align-items: center;
 }
 
@@ -430,13 +430,45 @@ footer {
 }
 
 
-/*Styling of checklist (migrated to main css file by tvp*/
+/*Styling of checklist (migrated to main css file by tvp, and adjusted to fit the website)*/
+#checklistLink {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: 6px 18px;
+  border-radius: 18px;
+  font-size: 1em;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(240, 168, 104, 0.15);
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  margin: 0 16px;
+}
+
+#checklistLink:hover{
+  background-color: var(--tertiary-color);
+  color: #fff;
+  text-decoration: none;
+}
+
+.checklist-bg {
+  background: #f1f1f1;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
 #itemInput {
   padding: 10px;
-  width: 70%;
+  margin-top: 10px;
   border: 1px solid var(--dark-grey);
   border-radius: 5px;
   font-size: 16px;
+  flex: 1 1 0;
+  width: auto;
 }
 
 #checklistButton{
@@ -444,6 +476,7 @@ footer {
   color: white;
   border: none;
   padding: 10px 15px;
+  margin-top: 12px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
@@ -452,6 +485,13 @@ footer {
 
 #checklistButton:hover {
   background-color: var(--tertiary-color);
+}
+
+.checklist-input-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 #checklist{
@@ -464,8 +504,8 @@ footer {
   color: var(--dark-grey);
   font-size: 18px;
   padding: 10px;
-  margin: 5px auto;
-  width: 80%;
+  margin: 10px auto;
+  width: 90%;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -478,13 +518,18 @@ footer {
   margin-right: 10px;
 }
 
+#checklist li span {
+  flex: 1 1 auto;
+}
+
 #checklist li button.remove {
   background-color: var(--primary-color);
   color: white;
-  padding: 5px 10px;
+  padding: 6px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: auto;
 }
 
 #checklist li button.remove:hover {
