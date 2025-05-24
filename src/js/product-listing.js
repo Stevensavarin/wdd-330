@@ -15,11 +15,15 @@ const listElement = document.querySelector(".product-list");
 if (searchQuery) {
   // If searching, fetch search results from API
   dataSource.searchProducts(searchQuery).then((results) => {
-    // Render results using your existing template
     const myList = new ProductList(null, dataSource, listElement);
     myList.renderList(results);
     document.querySelector(".title.highlight").textContent =
       `Results for "${searchQuery}"`;
+
+    // Show message if no products found
+    if (!results || results.length === 0) {
+      listElement.innerHTML = `<li style="width:100%;text-align:center;font-size:1.2em;margin:2em 0;">There are no products matching your description.</li>`;
+    }
   });
 } else if (category) {
   // Existing category logic
