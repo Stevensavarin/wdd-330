@@ -11,6 +11,30 @@ const category = getParam("category");
 
 const dataSource = new ProductData();
 const listElement = document.querySelector(".product-list");
+const sortSelect = document.getElementById("sort");
+
+let currentList = []; // will store the default display of products 
+
+function sortProducts(products, sortBy) {
+  const sorted = products.slice();
+
+  if (sortBy === "name") {
+    sorted.sort((a, b) => a.Name.localeCompare(b.Name));
+  } else if (sortBy === "price") {
+    sorted.sort((a, b) => a.FinalPrice - b.FinalPrice);
+  }
+  return sorted;
+}
+
+// handle for the drop down change 
+function handleSortChange() {
+  const selected = sortSelect.value;
+  const sortedList = sortProducts(currentList, selected);
+  const myList = new ProductList(null, dataSource, listElement);
+  myList.renderList(sortedList);
+}
+
+sortSelect.addEventListener("change", handleSortChange);
 
 if (searchQuery) {
   // If searching, fetch search results from API
@@ -26,11 +50,16 @@ if (searchQuery) {
     }
   });
 } else if (category) {
-  // Existing category logic
   const displayCategory = category
     ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "";
   document.querySelector(".title.highlight").textContent = displayCategory;
+
   const myList = new ProductList(category, dataSource, listElement);
-  myList.init();
+
+  // Get the product data, store it, and render
+  dataSource.getData(category).then((results) => {
+    currentList = results;
+    myList.renderList(results);
+  });
 }
