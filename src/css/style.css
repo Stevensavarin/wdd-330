@@ -499,3 +499,23 @@ footer {
   background: var(--tertiary-color);
   color: #fff;
 }
+
+/* Product Image Styling */ /*Andrew Mogbeyiromore W03*/
+.product-grid img,
+.product-card img,
+.product-detail img {
+  width: 100%;
+  max-width: 100px; 
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 8px; 
+}
+
+/* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
+@media screen and (max-width: 768px) {
+  .product-grid img,
+  .product-card img,
+  .product-detail img {
+    max-width: 150px;
+  }
+}
