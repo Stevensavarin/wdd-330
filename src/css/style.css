@@ -127,7 +127,8 @@ button {
   width: 25px;
 }
 
-.cart:hover svg {
+.cart-icon:hover svg,
+.cart-icon:focus svg {
   fill: gray;
 }
 
@@ -210,7 +211,58 @@ button {
   color: var(--dark-grey);
 }
 
-.price-wrapper { /*Steven Savarin W03*/
+.cart-page .product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cart-page .cart-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 1em 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cart-page .cart-card button.increment,
+.cart-page .cart-card button.decrement {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  background: #eee;
+  color: #333;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0 2px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border 0.2s;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-page .cart-card button.increment:hover,
+.cart-page .cart-card button.decrement:hover {
+  background: #ccc;
+  border-color: #888;
+}
+
+.price-wrapper {
+  /*Steven Savarin W03*/
   display: flex;
   align-items: baseline;
   gap: 12px;
@@ -244,7 +296,7 @@ button {
   box-shadow: 0 2px 6px rgba(255, 82, 82, 0.4);
   user-select: none;
   white-space: nowrap;
-}  /*Steven Savarin W03*/
+} /*Steven Savarin W03*/
 
 /* Styles for product lists */
 .product-card {
@@ -269,7 +321,8 @@ button {
   font-size: 1em;
 }
 
-.product-card__price { /*Steven Savarin W03*/
+.product-card__price {
+  /*Steven Savarin W03*/
   font-size: 1.2rem;
   font-weight: 700;
   color: #222222;
@@ -299,6 +352,26 @@ button {
   user-select: none;
 } /*Steven Savarin W03*/
 
+/*Customizable alert to index*/ /*Steven Savarin W03*/
+.alert-list {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.alert-message {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  max-width: 300px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+} /*Steven Savarin W03*/
+
 /* End product list card */
 
 .product-detail {
@@ -316,7 +389,6 @@ button {
   display: grid;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
-  /* max-height: 120px; */
   align-items: center;
 }
 
@@ -379,4 +451,71 @@ footer {
   text-align: right;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+/*Product Search*/
+#searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px auto 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  margin-left: 0;
+}
+
+.navbar-search input[type="text"] {
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--light-grey);
+  font-size: 1em;
+  width: 800px;
+  max-width: 100%;
+}
+
+.navbar-search button {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 10%;
+  width: 32px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.navbar-search button:hover {
+  background: var(--tertiary-color);
+  color: #fff;
+}
+
+/* Product Image Styling */ /*Andrew Mogbeyiromore W03*/
+.product-grid img,
+.product-card img,
+.product-detail img {
+  width: 100%;
+  max-width: 100px; 
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 8px; 
+}
+
+/* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
+@media screen and (max-width: 768px) {
+  .product-grid img,
+  .product-card img,
+  .product-detail img {
+    max-width: 150px;
+  }
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "message": "Free shipping this weekend!📦",
+    "background": "#1e88e5",
+    "color": "white"
+  },
+  {
+    "message": "New collections available now.🏷️",
+    "background": "#43a047",
+    "color": "white"
+  },
+  {
+    "message": "Limited-time special discounts.💰",
+    "background": "#f4511e",
+    "color": "white"
+  }
+]

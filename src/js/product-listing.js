@@ -6,20 +6,61 @@ loadHeaderFooter().then(() => {
   updateCartCount();
 });
 
+const searchQuery = getParam("search");
 const category = getParam("category");
 
-// Capitalize the first letter and replace hyphens with spaces for display
-const displayCategory = category
-  ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
-  : "";
-
-document.querySelector(".title.highlight").textContent = displayCategory;
-
-// first create an instance of the ProductData class.
 const dataSource = new ProductData();
-// then get the element you want the product list to render in
 const listElement = document.querySelector(".product-list");
-// then create an instance of the ProductList class and send it the correct information.
-const myList = new ProductList(category, dataSource, listElement);
-// finally call the init method to show the products
-myList.init();
+const sortSelect = document.getElementById("sort");
+
+let currentList = []; // will store the default display of products 
+
+function sortProducts(products, sortBy) {
+  const sorted = products.slice();
+
+  if (sortBy === "name") {
+    sorted.sort((a, b) => a.Name.localeCompare(b.Name));
+  } else if (sortBy === "price") {
+    sorted.sort((a, b) => a.FinalPrice - b.FinalPrice);
+  }
+  return sorted;
+}
+
+// handle for the drop down change 
+function handleSortChange() {
+  const selected = sortSelect.value;
+  const sortedList = sortProducts(currentList, selected);
+  listElement.innerHTML = "";
+  const myList = new ProductList(null, dataSource, listElement);
+  myList.renderList(sortedList);
+}
+
+sortSelect.addEventListener("change", handleSortChange);
+
+if (searchQuery) {
+  // If searching, fetch search results from API
+  dataSource.searchProducts(searchQuery).then((results) => {
+    const myList = new ProductList(null, dataSource, listElement);
+    myList.renderList(results);
+    document.querySelector(".title.highlight").textContent =
+      `Results for "${searchQuery}"`;
+
+    // Show message if no products found
+    if (!results || results.length === 0) {
+      listElement.innerHTML = `<li style="width:100%;text-align:center;font-size:1.2em;margin:2em 0;">There are no products matching your description.</li>`;
+    }
+  });
+} else if (category) {
+  const displayCategory = category
+    ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "";
+  document.querySelector(".title.highlight").textContent = displayCategory;
+
+  const myList = new ProductList(category, dataSource, listElement);
+
+  // Get the product data, store it, and render
+  dataSource.getData(category).then((results) => {
+    currentList = results;
+    myList.renderList(results);
+  });
+}
