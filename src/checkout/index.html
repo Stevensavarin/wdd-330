@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
 
     <script src="../js/checkout.js" type="module"></script>
   </head>
@@ -17,8 +17,61 @@
     <header id="main-header"></header>
 
     <main class="divider">
-      <section class="products">
-        <h2>Review & Place your Order</h2>
+      <h2>Review & Place your Order</h2>
+      <section class="checkout-form">
+        <form name="checkout">
+          <input type="hidden" name="orderDate" id="orderDate">
+
+          <fieldset>
+            <legend></legend>
+            <div class="checkout__name">
+              <label for="fname">First Name</label>
+              <input type="text" name="fname" id="fname" required>
+              <label for="lname">Last Name</label>
+              <input type="text" name="lname" id="lname" required>
+            </div>
+            <div class="checkout__address">
+              <label for="street">Street Address</label>
+              <input type="text" name="street" id="street" required>
+              <label for="city">City</label>
+              <input type="text" name="city" id="city" required>
+              <label for="state">State</label>
+              <input type="text" name="state" id="state" required>
+              <label for="zip">Zip</label>
+              <input type="text" name="zip" id="zip" required>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment</legend>
+            <div class="checkout__payment">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" name="cardNumber" id="cardNumber" required>
+              <label for="expiration">Expiration</label>
+              <input type="text" name="expiration" id="expiration" required>
+              <label for="code">CVV</label>
+              <input type="text" name="code" id="code" required>
+            </div>
+          </fieldset>
+
+          <fieldset class="checkout-summary">
+            <legend>Order Summary</legend>
+
+            <div class="order__summary">
+              <div>Items</div>
+              <div id="num-items"></div>
+              <div>Subtotal</div>
+              <div id="cartTotal"></div>
+              <div>Tax</div>
+              <div id="tax"></div>
+              <div>Shipping</div>
+              <div id="shipping"></div>
+              <div>Total</div>
+              <div id="orderTotal"></div>
+            </div>
+          </fieldset>
+          <button type="submit" id="checkoutSubmit">Checkout</button>
+        </form>
       </section>
     </main>
 
