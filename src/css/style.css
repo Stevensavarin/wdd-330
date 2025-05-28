@@ -505,10 +505,10 @@ footer {
 .product-card img,
 .product-detail img {
   width: 100%;
-  max-width: 100px; 
-  height: auto; 
-  object-fit: cover; 
-  border-radius: 8px; 
+  max-width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
