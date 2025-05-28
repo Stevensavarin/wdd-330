@@ -1,6 +1,6 @@
 import { loadHeaderFooter } from "./utils.mjs";
 import { updateCartCount } from "./utils.mjs";
-import { CheckoutProcess } from "./CheckoutProcess.mjs";
+import CheckoutProcess from "./CheckoutProcess.mjs";
 
 loadHeaderFooter().then(() => {
   updateCartCount();
