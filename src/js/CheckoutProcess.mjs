@@ -91,11 +91,12 @@ export default class CheckoutProcess {
     const order = formDataToJSON(formElement);
 
     order.orderDate = new Date().toISOString();
-    order.orderTotal = this.orderTotal;
-    order.tax = this.tax;
-    order.shipping = this.shipping;
+    order.orderTotal = this.orderTotal.toFixed(2); // string
+    order.tax = this.tax.toFixed(2);               // string
+    order.shipping = Number(this.shipping);         // number
     order.items = packageItems(this.list);
-    //console.log(order);
+
+    console.log(order);
 
     try {
       const response = await services.checkout(order);
