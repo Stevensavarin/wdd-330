@@ -97,6 +97,7 @@ export default class CheckoutProcess {
     order.items = packageItems(this.list);
 
     console.log(order);
+    console.log(JSON.stringify(order));
 
     try {
       const response = await services.checkout(order);
