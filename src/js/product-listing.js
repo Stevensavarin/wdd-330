@@ -52,6 +52,8 @@ if (searchQuery) {
     if (!results || results.length === 0) {
       listElement.innerHTML = `<li style="width:100%;text-align:center;font-size:1.2em;margin:2em 0;">There are no products matching your description.</li>`;
     }
+    // Set breadcrumb for search
+    setBreadcrumb("Search", results.length);
   });
 } else if (category) {
   const displayCategory = category
@@ -66,5 +68,16 @@ if (searchQuery) {
     currentList = results;
     myList.renderList(results);
     initQuickViewModal(); //Steven Savarin W04
+
+    setBreadcrumb(displayCategory, results.length);
   });
+
+}
+
+function setBreadcrumb(category, count) {
+  const breadcrumb = document.getElementById("breadcrumb");
+  if (breadcrumb) {
+    breadcrumb.textContent = `${category} → (${count} items)`;
+    breadcrumb.style.display = "block";
+  }
 }

@@ -98,3 +98,4 @@ export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".error-message");
   alerts.forEach((alert) => alert.remove());
 }
+

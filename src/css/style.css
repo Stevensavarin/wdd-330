@@ -775,3 +775,14 @@ footer {
   line-height: 1;
   flex-shrink: 0;
 }
+
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto 1em auto;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: #555;
+  background: #f8f8f8;
+  border-radius: 6px;
+  display: none; /*hide by default, show with js */
+}
