@@ -12,8 +12,7 @@ const productID = getParam("product");
 const product = new ProductDetails(productID, dataSource);
 product.init().then(() => {
   const categoryRaw = product.product.Category || "Category";
-  const category =
-    categoryRaw.charAt(0).toUpperCase() + categoryRaw.slice(1);
+  const category = categoryRaw.charAt(0).toUpperCase() + categoryRaw.slice(1);
   setBreadcrumb(category);
 });
 

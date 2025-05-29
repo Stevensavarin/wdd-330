@@ -421,7 +421,7 @@ button {
 .modal-content p {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #21867a;;
+  color: #21867a;
 }
 
 .close {
@@ -445,7 +445,9 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -473,7 +475,6 @@ button {
     transform: scale(1);
   }
 }
-
 
 /* End product list card */
 
@@ -632,7 +633,7 @@ footer {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 8px; 
+  border-radius: 8px;
 }
 
 /* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
@@ -804,7 +805,7 @@ footer {
   margin-bottom: 0.5em;
   display: block;
   object-fit: contain;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
 .carousel-thumbnails {

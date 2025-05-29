@@ -1,42 +1,40 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Products</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/product-listing.js" type="module"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sleep Outside | Products</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <script src="../js/product-listing.js" type="module"></script>
-</head>
+  <body>
+    <header class="divider" id="main-header"></header>
+    <nav id="breadcrumb" class="breadcrumb"></nav>
 
-<body>
-  <header class="divider" id="main-header"></header>
-  <nav id="breadcrumb" class="breadcrumb"></nav>
-  
-  <main class="divider">
-    <section class="products">
-      <h2>Top Products: <span class="title highlight"></span></h2>
-      <div class="sort-container">
-        <label for="sort">Sort By:</label>
-        <select id="sort">
-          <option value="default">Default</option>
-          <option value="name">Name (A-Z)</option>
-          <option value="price">Price (Low to High)</option>
-        </select>
+    <main class="divider">
+      <section class="products">
+        <h2>Top Products: <span class="title highlight"></span></h2>
+        <div class="sort-container">
+          <label for="sort">Sort By:</label>
+          <select id="sort">
+            <option value="default">Default</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="price">Price (Low to High)</option>
+          </select>
+        </div>
+        <ul class="product-list"></ul>
+      </section>
+    </main>
+    <footer id="main-footer"></footer>
+    <div id="quick-view-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modal-image" src="" alt="Product Image" />
+        <h3 id="modal-brand"></h3>
+        <h2 id="modal-name"></h2>
+        <p id="modal-price"></p>
       </div>
-      <ul class="product-list"></ul>
-    </section>
-  </main>
-  <footer id="main-footer"></footer>
-  <div id="quick-view-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modal-image" src="" alt="Product Image" />
-      <h3 id="modal-brand"></h3>
-      <h2 id="modal-name"></h2>
-      <p id="modal-price"></p>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

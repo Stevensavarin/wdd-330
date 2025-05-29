@@ -72,20 +72,22 @@ function cartItemTemplate(item) {
     : 0;
 
   return `
-    <li class="cart-card divider" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">
+    <li class="cart-card divider" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">
       <a href="#" class="cart-card__image">
         <img src="${item.Image}" alt="${item.Name}" />
       </a>
       <h2 class="card__name">${item.Name}</h2>
       <p class="cart-card__color">
-        ${item.selectedColor?.ColorName 
-          ? `<img src="${item.selectedColor.ColorChipImageSrc}" alt="${item.selectedColor.ColorName}" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">${item.selectedColor.ColorName}` 
-          : ""}
+        ${
+          item.selectedColor?.ColorName
+            ? `<img src="${item.selectedColor.ColorChipImageSrc}" alt="${item.selectedColor.ColorName}" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">${item.selectedColor.ColorName}`
+            : ""
+        }
       </p>
       <p class="cart-card__quantity">
         qty: <span class="quantity" data-id="${item.Id}">${item.quantity || 1}</span>
-        <button class="decrement" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">-</button>
-        <button class="increment" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">+</button>
+        <button class="decrement" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">-</button>
+        <button class="increment" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">+</button>
       </p>
       <p class="cart-card__price">
         <span class="final-price">${formattedFinalPrice}</span>
@@ -96,7 +98,7 @@ function cartItemTemplate(item) {
             : ""
         }
       </p>
-      <span class="remove-item" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}" style="cursor:pointer;">❌</span>
+      <span class="remove-item" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}" style="cursor:pointer;">❌</span>
     </li>
   `;
 } //Steven Savarin W03 + Tymur Pushnoy W04
@@ -128,7 +130,10 @@ function removeFromCart(id, colorCode) {
   let cart = getLocalStorage("so-cart") || [];
   cart = cart.filter(
     (item) =>
-      !(item.Id === id && (item.selectedColor?.ColorCode || "") === (colorCode || ""))
+      !(
+        item.Id === id &&
+        (item.selectedColor?.ColorCode || "") === (colorCode || "")
+      ),
   );
   setLocalStorage("so-cart", cart);
   renderCartContents();

@@ -8,7 +8,7 @@ loadHeaderFooter().then(() => {
 });
 
 const searchQuery = getParam("search");
-const category = getParam("category");
+const categoryParam = getParam("category");
 
 const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
@@ -55,23 +55,21 @@ if (searchQuery) {
     // Set breadcrumb for search
     setBreadcrumb("Search", results.length);
   });
-} else if (category) {
-  const displayCategory = category
-    ? category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+} else if (categoryParam) {
+  const displayCategory = categoryParam
+    ? categoryParam.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "";
   document.querySelector(".title.highlight").textContent = displayCategory;
 
-  const myList = new ProductList(category, dataSource, listElement);
+  const myList = new ProductList(categoryParam, dataSource, listElement);
 
-  // Get the product data, store it, and render
-  dataSource.getData(category).then((results) => {
+  dataSource.getData(categoryParam).then((results) => {
     currentList = results;
     myList.renderList(results);
     initQuickViewModal(); //Steven Savarin W04
 
     setBreadcrumb(displayCategory, results.length);
   });
-
 }
 
 function setBreadcrumb(category, count) {
