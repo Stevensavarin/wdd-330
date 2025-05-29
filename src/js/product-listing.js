@@ -1,6 +1,7 @@
 import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter, getParam, updateCartCount } from "./utils.mjs";
+import { initQuickViewModal } from "./quickViewModal.mjs"; //Steven Savarin W04
 
 loadHeaderFooter().then(() => {
   updateCartCount();
@@ -33,6 +34,7 @@ function handleSortChange() {
   listElement.innerHTML = "";
   const myList = new ProductList(null, dataSource, listElement);
   myList.renderList(sortedList);
+  initQuickViewModal(); //Steven Savarin W04
 }
 
 sortSelect.addEventListener("change", handleSortChange);
@@ -42,6 +44,7 @@ if (searchQuery) {
   dataSource.searchProducts(searchQuery).then((results) => {
     const myList = new ProductList(null, dataSource, listElement);
     myList.renderList(results);
+    initQuickViewModal(); //Steven Savarin W04
     document.querySelector(".title.highlight").textContent =
       `Results for "${searchQuery}"`;
 
@@ -62,5 +65,6 @@ if (searchQuery) {
   dataSource.getData(category).then((results) => {
     currentList = results;
     myList.renderList(results);
+    initQuickViewModal(); //Steven Savarin W04
   });
 }
