@@ -95,6 +95,6 @@ export function alertMessage(message, scroll = true) {
 }
 
 export function removeAllAlerts() {
-  const alerts = document.querySelectorAll(".error");
-  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+  const alerts = document.querySelectorAll(".error-message");
+  alerts.forEach((alert) => alert.remove());
 }

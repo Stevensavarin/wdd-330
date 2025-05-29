@@ -92,6 +92,8 @@ export default class CheckoutProcess {
   }
 
   async checkout() {
+    removeAllAlerts();
+
     const formElement = document.forms["checkout"];
     const order = formDataToJSON(formElement);
 
@@ -110,7 +112,7 @@ export default class CheckoutProcess {
       setLocalStorage("so-cart", []);
       location.assign("/checkout/success.html");
     } catch (err) {
-      removeAllAlerts();
+      //removeAllAlerts();
       // If err.message is an object with multiple messages:
       if (typeof err.message === "object") {
         for (let message in err.message) {
