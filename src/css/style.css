@@ -527,10 +527,10 @@ footer {
 .product-card img,
 .product-detail img {
   width: 100%;
-  max-width: 100px; 
-  height: auto; 
-  object-fit: cover; 
-  border-radius: 8px; 
+  max-width: 100px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
@@ -548,7 +548,7 @@ footer {
   margin: 2em auto;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   padding: 2em 2em 1.5em 2em;
 }
 
@@ -612,7 +612,10 @@ footer {
 }
 
 .summary-label {
-  color: var(--secondary-color, #4caf50); /* fallback to green if variable not set */
+  color: var(
+    --secondary-color,
+    #4caf50
+  ); /* fallback to green if variable not set */
   font-weight: 500;
   margin-right: 0.5em;
 }
@@ -650,7 +653,7 @@ footer {
   padding: 10px 20px;
   font-size: 20px;
   font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   max-width: 800px;
   margin: 10px auto;
 }

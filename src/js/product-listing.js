@@ -13,7 +13,7 @@ const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
 const sortSelect = document.getElementById("sort");
 
-let currentList = []; // will store the default display of products 
+let currentList = []; // will store the default display of products
 
 function sortProducts(products, sortBy) {
   const sorted = products.slice();
@@ -26,7 +26,7 @@ function sortProducts(products, sortBy) {
   return sorted;
 }
 
-// handle for the drop down change 
+// handle for the drop down change
 function handleSortChange() {
   const selected = sortSelect.value;
   const sortedList = sortProducts(currentList, selected);
