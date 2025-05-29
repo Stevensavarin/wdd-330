@@ -48,17 +48,55 @@ function productDetailsTemplate(product) {
   document.querySelector("#p-brand").textContent = product.Brand.Name;
   document.querySelector("#p-name").textContent = product.NameWithoutBrand;
 
-  const productImage = document.querySelector("#productImage");
-  let imageUrl = product.Images?.PrimaryExtraLarge || product.Image;
-  if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = import.meta.env.VITE_SERVER_URL + imageUrl;
+  // Carousel logic
+  const carouselContainer = document.querySelector("#productImageCarousel");
+  carouselContainer.innerHTML = ""; // Clear previous content
+
+  // Gather all images: main + extras (if any)
+  let images = [];
+  if (product.Images && product.Images.ExtraImages && product.Images.ExtraImages.length > 0) {
+    images = [product.Images.PrimaryExtraLarge, ...product.Images.ExtraImages.map(img => img.Src)];
+  } else {
+    images = [product.Images?.PrimaryExtraLarge || product.Image];
   }
-  productImage.src = imageUrl;
-  productImage.alt = product.NameWithoutBrand;
+
+  // Main image element
+  let currentIndex = 0;
+  const mainImg = document.createElement("img");
+  mainImg.className = "carousel-main-image";
+  let mainImgUrl = images[0];
+  if (mainImgUrl && !mainImgUrl.startsWith("http")) {
+    mainImgUrl = import.meta.env.VITE_SERVER_URL + mainImgUrl;
+  }
+  mainImg.src = mainImgUrl;
+  mainImg.alt = product.NameWithoutBrand;
+  carouselContainer.appendChild(mainImg);
+
+  // Thumbnails if more than one image
+  if (images.length > 1) {
+    const thumbs = document.createElement("div");
+    thumbs.className = "carousel-thumbnails";
+    images.forEach((imgUrl, idx) => {
+      let thumbUrl = imgUrl;
+      if (thumbUrl && !thumbUrl.startsWith("http")) {
+        thumbUrl = import.meta.env.VITE_SERVER_URL + thumbUrl;
+      }
+      const thumb = document.createElement("img");
+      thumb.className = "carousel-thumb";
+      thumb.src = thumbUrl;
+      thumb.alt = product.NameWithoutBrand + " thumbnail " + (idx + 1);
+      thumb.addEventListener("click", () => {
+        mainImg.src = thumb.src;
+        currentIndex = idx;
+      });
+      thumbs.appendChild(thumb);
+    });
+    carouselContainer.appendChild(thumbs);
+  }
 
   // Show consistent prices
-  const priceContainer = document.querySelector("#productPrice"); //Steven Savarin W03
-  priceContainer.innerHTML = ""; // Clean
+  const priceContainer = document.querySelector("#productPrice");
+  priceContainer.innerHTML = "";
 
   const priceWrapper = document.createElement("div");
   priceWrapper.classList.add("price-wrapper");
@@ -87,7 +125,8 @@ function productDetailsTemplate(product) {
   document.querySelector("#productDesc").innerHTML = product.DescriptionHtmlSimple;
 
   document.querySelector("#addToCart").dataset.id = product.Id;
-} //Steven Savarin W03
+}
+//Steven Savarin W03
 
 // ************* Alternative Display Product Details Method *******************
 // function productDetailsTemplate(product) {

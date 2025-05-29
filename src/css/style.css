@@ -786,3 +786,44 @@ footer {
   border-radius: 6px;
   display: none; /*hide by default, show with js */
 }
+
+.product-image-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.carousel-main-image {
+  width: 100%;
+  max-width: 350px;
+  max-height: 350px;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.carousel-thumbnails {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+
+.product-image-carousel .carousel-thumb {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  background: #fff;
+}
+
+.carousel-thumb:hover,
+.carousel-thumb.active {
+  border: 2px solid var(--secondary-color, #0077cc);
+}
