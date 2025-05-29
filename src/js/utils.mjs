@@ -63,11 +63,38 @@ export async function loadHeaderFooter() {
 }
 
 export function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
-    const countIcon = document.querySelector(".item-count");
-    if (countIcon) {
-        //sum up the quantity of each item in the list
-        const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        countIcon.textContent = totalCount;
-    }
+  const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
+  const countIcon = document.querySelector(".item-count");
+  if (countIcon) {
+      //sum up the quantity of each item in the list
+      const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      countIcon.textContent = totalCount;
+  }
+}
+
+export function alertMessage(message, scroll = true) {
+  // create element to hold the alert
+  const alert = document.createElement('div');
+  alert.classList.add('error-message'); // Use a unique class for styling
+
+  // set the contents: message and an X button
+  alert.innerHTML = `<span class="error-text">${message}</span><button class="error-close">X</button>`;
+
+  // add a listener to the X button to remove the alert
+  alert.querySelector('.error-close').addEventListener('click', function () {
+    alert.remove();
+  });
+
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  if (main) {
+    main.prepend(alert);
+    // scroll to top if requested
+    if (scroll) window.scrollTo(0, 0);
+  }
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".error-message");
+  alerts.forEach((alert) => alert.remove());
 }
