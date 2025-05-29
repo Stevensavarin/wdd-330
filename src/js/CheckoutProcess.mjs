@@ -110,13 +110,15 @@ export default class CheckoutProcess {
       setLocalStorage("so-cart", []);
       location.assign("/checkout/success.html");
     } catch (err) {
-      // get rid of any preexisting alerts.
       removeAllAlerts();
-      for (let message in err.message) {
-        alertMessage(err.message[message]);
+      // If err.message is an object with multiple messages:
+      if (typeof err.message === "object") {
+        for (let message in err.message) {
+          alertMessage(err.message[message]);
+        }
+      } else {
+        alertMessage(err.message || "An unknown error occurred.");
       }
-
-      console.log(err);
     }
   }
 }

@@ -72,29 +72,29 @@ export function updateCartCount() {
   }
 }
 
-export function alertMessage(message, scroll = true, duration = 3000) {
-  const alert = document.createElement("div");
-  alert.classList.add("alert");
-  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+export function alertMessage(message, scroll = true) {
+  // create element to hold the alert
+  const alert = document.createElement('div');
+  alert.classList.add('error-message'); // Use a unique class for styling
 
-  alert.addEventListener("click", function (e) {
-    if (e.target.tagName == "SPAN") {
-      main.removeChild(this);
-    }
+  // set the contents: message and an X button
+  alert.innerHTML = `<span class="error-text">${message}</span><button class="error-close">X</button>`;
+
+  // add a listener to the X button to remove the alert
+  alert.querySelector('.error-close').addEventListener('click', function () {
+    alert.remove();
   });
-  const main = document.querySelector("main");
-  main.prepend(alert);
-  // make sure they see the alert by scrolling to the top of the window
-  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
-  if (scroll) window.scrollTo(0, 0);
 
-  // left this here to show how you could remove the alert automatically after a certain amount of time.
-  // setTimeout(function () {
-  //   main.removeChild(alert);
-  // }, duration);
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  if (main) {
+    main.prepend(alert);
+    // scroll to top if requested
+    if (scroll) window.scrollTo(0, 0);
+  }
 }
 
 export function removeAllAlerts() {
-  const alerts = document.querySelectorAll(".alert");
+  const alerts = document.querySelectorAll(".error");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
