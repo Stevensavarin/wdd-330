@@ -524,6 +524,28 @@ button {
   grid-column: 3;
 }
 
+#checkoutButton {
+  display: inline-block;
+  padding: 0.7em 2em;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1em;
+}
+
+#checkoutButton:hover,
+#checkoutButton:focus {
+  background-color: var(--tertiary-color);
+  color: #fff;
+  text-decoration: none;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -608,8 +630,8 @@ footer {
 .product-card img,
 .product-detail img {
   width: 100%;
-  height: auto; 
-  object-fit: cover; 
+  height: auto;
+  object-fit: cover;
   border-radius: 8px; 
 }
 
@@ -628,7 +650,7 @@ footer {
   margin: 2em auto;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   padding: 2em 2em 1.5em 2em;
 }
 
@@ -692,7 +714,10 @@ footer {
 }
 
 .summary-label {
-  color: var(--secondary-color, #4caf50); /* fallback to green if variable not set */
+  color: var(
+    --secondary-color,
+    #4caf50
+  ); /* fallback to green if variable not set */
   font-weight: 500;
   margin-right: 0.5em;
 }
@@ -716,4 +741,37 @@ footer {
 
 #checkoutSubmit:hover {
   background: var(--tertiary-color);
+}
+
+/* Custom alert message for checkout errors */
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  color: #222;
+  border: 2px solid #d97b00;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+.error-message .error-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.error-message .error-close {
+  background: none;
+  border: none;
+  color: var(--dark-grey);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  flex-shrink: 0;
 }
