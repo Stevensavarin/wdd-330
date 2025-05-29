@@ -8,15 +8,12 @@ export default class ProductDetails {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.selectedColorIdx = 0;
   }
 
   async init() {
-    // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
-    // the product details are needed before rendering the HTML
     this.renderProductDetails();
-    // once the HTML is rendered, add a listener to the Add to Cart button
-    // Notice the .bind(this). This callback will not work if the bind(this) is missing. Review the readings from this week on 'this' to understand why.
     document
       .getElementById('addToCart')
       .addEventListener('click', this.addProductToCart.bind(this));
@@ -24,66 +21,128 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
-    const existing = cartItems.find(item => item.Id === this.product.Id);
+    // Get the selected color (default to first if none)
+    const colors = this.product.Colors || [];
+    const color = colors[this.selectedColorIdx] || colors[0] || {};
+
+    // Create a unique key for product+color
+    const cartKey = `${this.product.Id}_${color.ColorCode || "default"}`;
+
+    // Check if this exact product+color is already in the cart
+    let existing = cartItems.find(
+      item => item.Id === this.product.Id && item.selectedColor?.ColorCode === color.ColorCode
+    );
+
     if (existing) {
       existing.quantity = (existing.quantity || 1) + 1;
     } else {
       // Always use PrimaryMedium for cart images as per assignment
-      if (this.product.Images && this.product.Images.PrimaryMedium) {
-        this.product.Image = this.product.Images.PrimaryMedium;
-      }
-      this.product.quantity = 1;
-      cartItems.push(this.product);
+      let image = this.product.Images && this.product.Images.PrimaryMedium
+        ? this.product.Images.PrimaryMedium
+        : this.product.Image;
+
+      const cartProduct = {
+        ...this.product,
+        Image: image,
+        quantity: 1,
+        selectedColor: {
+          ColorCode: color.ColorCode,
+          ColorName: color.ColorName,
+          ColorPreviewImageSrc: color.ColorPreviewImageSrc,
+          ColorChipImageSrc: color.ColorChipImageSrc
+        }
+      };
+      cartItems.push(cartProduct);
     }
     setLocalStorage("so-cart", cartItems);
     updateCartCount();
   }
 
   renderProductDetails() {
-    productDetailsTemplate(this.product);
+    productDetailsTemplate(this.product, this);
   }
 }
 
-function productDetailsTemplate(product) {
+function productDetailsTemplate(product, productDetailsInstance) {
   document.querySelector("#p-brand").textContent = product.Brand.Name;
   document.querySelector("#p-name").textContent = product.NameWithoutBrand;
 
-  // Carousel logic
-  const carouselContainer = document.querySelector("#productImageCarousel");
-  carouselContainer.innerHTML = ""; // Clear previous content
+  // --- COLOR SWATCHES ---
+  const swatchContainer = document.getElementById("colorSwatches");
+  swatchContainer.innerHTML = "";
+  productDetailsInstance.selectedColorIdx = 0;
 
-  // Gather all images: main + extras (if any)
-  let images = [];
-  if (product.Images && product.Images.ExtraImages && product.Images.ExtraImages.length > 0) {
-    images = [product.Images.PrimaryExtraLarge, ...product.Images.ExtraImages.map(img => img.Src)];
+  //hide by default
+  swatchContainer.style.display = "none";
+
+  if (product.Colors && product.Colors.length > 1) {
+    swatchContainer.style.display = "flex"; //show only if multiple colors
+    product.Colors.forEach((color, idx) => {
+      const swatch = document.createElement("button");
+      swatch.type = "button";
+      swatch.className = "color-swatch" + (idx === 0 ? " selected" : "");
+      swatch.title = color.ColorName;
+
+      const img = document.createElement("img");
+      img.src = color.ColorPreviewImageSrc;
+      img.alt = color.ColorName + " swatch";
+      swatch.appendChild(img);
+
+      swatch.addEventListener("click", () => {
+        swatchContainer.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
+        swatch.classList.add("selected");
+        productDetailsInstance.selectedColorIdx = idx;
+        document.querySelector("#productColor").textContent = color.ColorName;
+      });
+
+      swatchContainer.appendChild(swatch);
+    });
+    //set initial color name
+    document.querySelector("#productColor").textContent = product.Colors[0].ColorName;
+  } else if (product.Colors && product.Colors.length === 1) {
+    //only one color, hide swatches and show its name
+    swatchContainer.style.display = "none";
+    document.querySelector("#productColor").textContent = product.Colors[0].ColorName;
   } else {
-    images = [product.Images?.PrimaryExtraLarge || product.Image];
+    //no colors, hide swatches and clear color name
+    swatchContainer.style.display = "none";
+    document.querySelector("#productColor").textContent = "";
   }
 
-  // Main image element
+  // --- CAROUSEL LOGIC ---
+  const carouselContainer = document.querySelector("#productImageCarousel");
+  carouselContainer.innerHTML = "";
+
+  //always use the original main image, regardless of color selection
+  let mainImgUrl;
+  if (product.Images && product.Images.PrimaryExtraLarge) {
+    mainImgUrl = product.Images.PrimaryExtraLarge;
+  } else {
+    mainImgUrl = product.Image;
+  }
+
+  //gaather extra images (only for the default color)
+  let images = [mainImgUrl];
+  if (product.Images && product.Images.ExtraImages && product.Images.ExtraImages.length > 0) {
+    images = [mainImgUrl, ...product.Images.ExtraImages.map(img => img.Src)];
+  }
+
+  //main image element
   let currentIndex = 0;
   const mainImg = document.createElement("img");
   mainImg.className = "carousel-main-image";
-  let mainImgUrl = images[0];
-  if (mainImgUrl && !mainImgUrl.startsWith("http")) {
-    mainImgUrl = import.meta.env.VITE_SERVER_URL + mainImgUrl;
-  }
   mainImg.src = mainImgUrl;
   mainImg.alt = product.NameWithoutBrand;
   carouselContainer.appendChild(mainImg);
 
-  // Thumbnails if more than one image
+  //thumbnails if more than one image
   if (images.length > 1) {
     const thumbs = document.createElement("div");
     thumbs.className = "carousel-thumbnails";
     images.forEach((imgUrl, idx) => {
-      let thumbUrl = imgUrl;
-      if (thumbUrl && !thumbUrl.startsWith("http")) {
-        thumbUrl = import.meta.env.VITE_SERVER_URL + thumbUrl;
-      }
       const thumb = document.createElement("img");
       thumb.className = "carousel-thumb";
-      thumb.src = thumbUrl;
+      thumb.src = imgUrl;
       thumb.alt = product.NameWithoutBrand + " thumbnail " + (idx + 1);
       thumb.addEventListener("click", () => {
         mainImg.src = thumb.src;
@@ -94,7 +153,7 @@ function productDetailsTemplate(product) {
     carouselContainer.appendChild(thumbs);
   }
 
-  // Show consistent prices
+  // --- PRICES, DESCRIPTION, ETC. (unchanged) ---
   const priceContainer = document.querySelector("#productPrice");
   priceContainer.innerHTML = "";
 
@@ -121,11 +180,10 @@ function productDetailsTemplate(product) {
 
   priceContainer.appendChild(priceWrapper);
 
-  document.querySelector("#productColor").textContent = product.Colors?.[0]?.ColorName || "";
   document.querySelector("#productDesc").innerHTML = product.DescriptionHtmlSimple;
-
   document.querySelector("#addToCart").dataset.id = product.Id;
 }
+
 //Steven Savarin W03
 
 // ************* Alternative Display Product Details Method *******************

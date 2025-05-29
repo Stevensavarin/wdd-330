@@ -30,19 +30,19 @@ function renderCartContents() {
   //remove listener
   document.querySelectorAll(".remove-item").forEach((btn) => {
     btn.addEventListener("click", function () {
-      removeFromCart(this.dataset.id);
+      removeFromCart(this.dataset.id, this.dataset.color);
     });
   });
 
   //increase/decrease listeners
   document.querySelectorAll(".increment").forEach((btn) => {
     btn.addEventListener("click", function () {
-      changeQuantity(this.dataset.id, 1);
+      changeQuantity(this.dataset.id, this.dataset.color, 1);
     });
   });
   document.querySelectorAll(".decrement").forEach((btn) => {
     btn.addEventListener("click", function () {
-      changeQuantity(this.dataset.id, -1);
+      changeQuantity(this.dataset.id, this.dataset.color, -1);
     });
   });
 }
@@ -72,18 +72,20 @@ function cartItemTemplate(item) {
     : 0;
 
   return `
-    <li class="cart-card divider" data-id="${item.Id}">
+    <li class="cart-card divider" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">
       <a href="#" class="cart-card__image">
-        <img src="${imageUrl}" alt="${item.Name}" />
+        <img src="${item.Image}" alt="${item.Name}" />
       </a>
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-      <p class="cart-card__color">${item.Colors?.[0]?.ColorName || ""}</p>
+      <h2 class="card__name">${item.Name}</h2>
+      <p class="cart-card__color">
+        ${item.selectedColor?.ColorName 
+          ? `<img src="${item.selectedColor.ColorChipImageSrc}" alt="${item.selectedColor.ColorName}" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">${item.selectedColor.ColorName}` 
+          : ""}
+      </p>
       <p class="cart-card__quantity">
         qty: <span class="quantity" data-id="${item.Id}">${item.quantity || 1}</span>
-        <button class="decrement" data-id="${item.Id}">-</button>
-        <button class="increment" data-id="${item.Id}">+</button>
+        <button class="decrement" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">-</button>
+        <button class="increment" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}">+</button>
       </p>
       <p class="cart-card__price">
         <span class="final-price">${formattedFinalPrice}</span>
@@ -94,10 +96,10 @@ function cartItemTemplate(item) {
             : ""
         }
       </p>
-      <span class="remove-item" data-id="${item.Id}" style="cursor:pointer;">❌</span>
+      <span class="remove-item" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ''}" style="cursor:pointer;">❌</span>
     </li>
   `;
-} //Steven Savarin W03
+} //Steven Savarin W03 + Tymur Pushnoy W04
 
 // Show cart total in EUR and formatted
 function showCartTotal() {
@@ -122,19 +124,25 @@ function showCartTotal() {
 renderCartContents();
 showCartTotal();
 
-function removeFromCart(id) {
+function removeFromCart(id, colorCode) {
   let cart = getLocalStorage("so-cart") || [];
-  cart = cart.filter((item) => item.Id !== id);
+  cart = cart.filter(
+    (item) =>
+      !(item.Id === id && (item.selectedColor?.ColorCode || "") === (colorCode || ""))
+  );
   setLocalStorage("so-cart", cart);
   renderCartContents();
   showCartTotal();
   updateCartCount();
 }
 
-function changeQuantity(id, quantityChange) {
+function changeQuantity(id, colorCode, quantityChange) {
   let cart = getLocalStorage("so-cart") || [];
   cart = cart.map((item) => {
-    if (item.Id === id) {
+    if (
+      item.Id === id &&
+      (item.selectedColor?.ColorCode || "") === (colorCode || "")
+    ) {
       let newQty = (item.quantity || 1) + quantityChange;
       if (newQty < 1) newQty = 1;
       return { ...item, quantity: newQty };
