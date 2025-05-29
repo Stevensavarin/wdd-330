@@ -22,9 +22,17 @@ function productCardTemplate(product) { //Steven Savarin W03
         </div>
         ${hasDiscount ? `<div class="product-card__discount">-${discountPercent}% OFF</div>` : ""}
       </a>
+      <button class="quick-view-btn" 
+        data-id="${product.Id}"
+        data-name="${product.Name}"
+        data-brand="${product.Brand.Name}"
+        data-price="${finalPrice}"
+        data-image="${product.Images.PrimaryMedium}">
+        Quick View
+      </button>
     </li>
   `;
-} //Steven Savarin W03
+} //Steven Savarin W04
 
 export default class ProductList {
   constructor(category, dataSource, listElement) {
