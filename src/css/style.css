@@ -440,46 +440,6 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
-  text-align: center;
-  background-color: #333;
-  color: white;
-}
-
-.partners {
-  margin: 1em 0;
-}
-
-.partners img {
-  height: 50px;
-  margin: 0 15px;
-}
-
-.scrolling-logos {
-  overflow: hidden;
-  width: 100%;
-  background: transparent;
-  position: relative;
-  height: 60px;
-}
-.logos-track {
-  display: flex;
-  width: max-content;
-  animation: scroll-logos 20s linear infinite;
-  align-items: center;
-  gap: 40px;
-}
-.logos-track img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-@keyframes scroll-logos {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .cart-footer.hide {
@@ -545,10 +505,10 @@ footer {
 .product-card img,
 .product-detail img {
   width: 100%;
-  max-width: 100px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
+  max-width: 100px; 
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 8px; 
 }
 
 /* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
