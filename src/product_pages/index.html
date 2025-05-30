@@ -10,19 +10,22 @@
 
   <body>
     <header id="main-header"></header>
+    <nav id="breadcrumb" class="breadcrumb"></nav>
 
     <main class="divider">
       <section class="product-detail">
         <h2 id="p-brand">Brand Name</h2>
         <h3 id="p-name" class="divider">Product</h3>
-        <img
-          src="../images/camping-products.jpg"
-          alt="Sleep Outside Camping Products"
-          id="productImage"
-          class="divider"
-        />
+
+        <div id="productImageCarousel" class="product-image-carousel">
+          <!-- images will be injected here by js -->
+        </div>
+
         <p id="productPrice" class="product-card__price">$000.99</p>
+
         <p id="productColor" class="product__color">Color</p>
+        <div id="colorSwatches" class="color-swatches"></div>
+
         <p id="productDesc" class="product__description">Description</p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="productId">Add to Cart</button>
