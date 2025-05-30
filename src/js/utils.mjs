@@ -40,7 +40,7 @@ export function renderListWithTemplate(template, parentElement, list, position =
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
@@ -62,13 +62,13 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-export function updateCartCount() {
+export function updateCartCount() { // Sydney Bohl
   const cart = JSON.parse(localStorage.getItem("so-cart")) || [];
   const countIcon = document.querySelector(".item-count");
   if (countIcon) {
-      //sum up the quantity of each item in the list
-      const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-      countIcon.textContent = totalCount;
+    //sum up the quantity of each item in the list
+    const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    countIcon.textContent = totalCount;
   }
 }
 

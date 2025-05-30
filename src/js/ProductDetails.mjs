@@ -56,6 +56,15 @@ export default class ProductDetails {
     }
     setLocalStorage("so-cart", cartItems);
     updateCartCount();
+
+    // Trigger animation bounce here - Sydney Bohl
+    const cartIcon = document.querySelector(".cart-icon");
+    if (cartIcon) {
+      cartIcon.classList.add("bounce");
+      cartIcon.addEventListener("animationend", () => {
+        cartIcon.classList.remove("bounce");
+      }, { once: true });
+    }
   }
 
   renderProductDetails() {
