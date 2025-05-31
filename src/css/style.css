@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -135,6 +135,32 @@ button {
 .cart-icon {
   position: relative;
   display: inline-block;
+}
+
+@keyframes cart-bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.3);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  75% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bounce {
+  animation: cart-bounce 0.5s ease;
 }
 
 .cart-icon .item-count {
@@ -366,7 +392,9 @@ button {
   box-shadow: 0 2px 6px rgba(255, 82, 82, 0.4);
   user-select: none;
   white-space: nowrap;
-} /*Steven Savarin W03*/
+}
+
+/*Steven Savarin W03*/
 
 /* Styles for product lists */
 .product-card {
@@ -420,9 +448,12 @@ button {
   margin-top: 6px;
   display: inline-block;
   user-select: none;
-} /*Steven Savarin W03*/
+}
 
-/*Customizable alert to index*/ /*Steven Savarin W03*/
+/*Steven Savarin W03*/
+
+/*Customizable alert to index*/
+/*Steven Savarin W03*/
 .alert-list {
   width: 100%;
   padding: 0.5rem;
@@ -440,9 +471,12 @@ button {
   max-width: 300px;
   margin: 0 auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-} /*Steven Savarin W03*/
+}
 
-/*Quick Lookup*/ /*Steven Savarin W04*/
+/*Steven Savarin W03*/
+
+/*Quick Lookup*/
+/*Steven Savarin W04*/
 
 .modal {
   display: none;
@@ -491,7 +525,7 @@ button {
 .modal-content p {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #21867a;;
+  color: #21867a;
 }
 
 .close {
@@ -515,7 +549,9 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -538,12 +574,12 @@ button {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
-
 
 /* End product list card */
 
@@ -592,6 +628,28 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+#checkoutButton {
+  display: inline-block;
+  padding: 0.7em 2em;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1em;
+}
+
+#checkoutButton:hover,
+#checkoutButton:focus {
+  background-color: var(--tertiary-color);
+  color: #fff;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 500px) {
@@ -673,18 +731,21 @@ footer {
   color: #fff;
 }
 
-/* Product Image Styling */ /*Andrew Mogbeyiromore W03*/
+/* Product Image Styling */
+/*Andrew Mogbeyiromore W03*/
 .product-grid img,
 .product-card img,
 .product-detail img {
   width: 100%;
-  height: auto; 
-  object-fit: cover; 
-  border-radius: 8px; 
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-/* Responsive Image Handling */ /*Andrew Mogbeyiromore W03*/
+/* Responsive Image Handling */
+/*Andrew Mogbeyiromore W03*/
 @media screen and (max-width: 768px) {
+
   .product-grid img,
   .product-card img,
   .product-detail img {
@@ -698,7 +759,7 @@ footer {
   margin: 2em auto;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   padding: 2em 2em 1.5em 2em;
 }
 
@@ -762,7 +823,9 @@ footer {
 }
 
 .summary-label {
-  color: var(--secondary-color, #4caf50); /* fallback to green if variable not set */
+  color: var(--secondary-color,
+      #4caf50);
+  /* fallback to green if variable not set */
   font-weight: 500;
   margin-right: 0.5em;
 }
@@ -786,4 +849,135 @@ footer {
 
 #checkoutSubmit:hover {
   background: var(--tertiary-color);
+}
+
+/* Custom alert message for checkout errors */
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  color: #222;
+  border: 2px solid #d97b00;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+.error-message .error-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.error-message .error-close {
+  background: none;
+  border: none;
+  color: var(--dark-grey);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* breadcrumbs */
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto 1em auto;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: #555;
+  background: #f8f8f8;
+  border-radius: 6px;
+  display: none;
+  /*hide by default, show with js */
+}
+
+/* product image carousele */
+.product-image-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.carousel-main-image {
+  width: 100%;
+  max-width: 350px;
+  max-height: 350px;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.carousel-thumbnails {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+
+.product-image-carousel .carousel-thumb {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  background: #fff;
+}
+
+.carousel-thumb:hover,
+.carousel-thumb.active {
+  border: 2px solid var(--secondary-color, #0077cc);
+}
+
+/* color swatches */
+.color-swatches {
+  display: none;
+  /* Hidden by default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.color-swatch {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  padding: 3px;
+  cursor: pointer;
+  transition: border 0.2s;
+  background: #fff;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-swatch.selected {
+  border: 2px solid var(--secondary-color, #525b0f);
+}
+
+.color-swatch img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.color-swatch-label {
+  font-size: 0.9em;
+  margin-left: 0.5em;
 }
