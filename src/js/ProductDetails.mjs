@@ -2,6 +2,8 @@ import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 import { formatPriceEUR } from "./currencyUtils.mjs"; // steven savarin
 
+import Comments from './Comments.mjs'; // steven savarin W04
+
 export default class ProductDetails {
 
   constructor(productId, dataSource) {
@@ -20,6 +22,10 @@ export default class ProductDetails {
     document
       .getElementById('addToCart')
       .addEventListener('click', this.addProductToCart.bind(this));
+
+      // Inicializa el sistema de comentarios
+    this.comments = new Comments(this.productId);
+    this.comments.init();
   }
 
   addProductToCart() {
