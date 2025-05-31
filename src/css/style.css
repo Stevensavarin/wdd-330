@@ -981,3 +981,47 @@ footer {
   font-size: 0.9em;
   margin-left: 0.5em;
 }
+
+/* newsletter section by Andrew Mogbeyiromore W04*/
+
+.newsletter {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.newsletter h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+}
+
+input[type="email"] {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px; /* Keeps it clean */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 15px;
+  background: #f0a868;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 150px; 
+}
+
+button:hover {
+  background: #e29550;
+}
