@@ -23,3 +23,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Existing search form logic
+  const searchForm = document.getElementById("searchForm");
+  if (searchForm) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const query = document.getElementById("searchInput").value.trim();
+      if (query) {
+        window.location.href = `/product_listing/index.html?search=${encodeURIComponent(query)}`;
+      }
+    });
+  }
+
+  // Newsletter signup functionality
+  const newsletterForm = document.getElementById("newsletter-form");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message");
+
+      if (email) {
+        message.innerText = `Thank you for subscribing, ${email}!`;
+        message.style.color = "green";
+      } else {
+        message.innerText = "Please enter a valid email.";
+        message.style.color = "red";
+      }
+    });
+  }
+});
