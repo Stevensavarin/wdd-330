@@ -58,27 +58,27 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Call to action for first time users - Sydney Bohl
-document.addEventListener('DOMContentLoaded', function () {
-  const modal = document.getElementById('welcomeModal');
-  const closeButton = document.getElementById('closeModal');
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("welcomeModal");
+  const closeButton = document.getElementById("closeModal");
 
   // A check to see if the user has already seen the pop-up
-  const hasVisited = localStorage.getItem('hasVisited');
+  const hasVisited = localStorage.getItem("hasVisited");
 
   if (!hasVisited) {
-    modal.style.display = 'block';
-    localStorage.setItem('hasVisited', 'true');
+    modal.style.display = "block";
+    localStorage.setItem("hasVisited", "true");
   }
 
   // Close the pop-up
-  closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
   });
 
   // Close the pop-up if the user clicks outside of it
-  window.addEventListener('click', (event) => {
+  window.addEventListener("click", (event) => {
     if (event.target === modal) {
-      modal.style.display = 'none';
+      modal.style.display = "none";
     }
   });
 });

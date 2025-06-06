@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -147,7 +147,7 @@ button:hover {
 
 .register-button {
   display: inline-block;
-  padding: 0.50rem;
+  padding: 0.5rem;
   background-color: #8a470c;
   color: white;
   text-decoration: none;
@@ -438,6 +438,7 @@ button:hover {
   padding: 4px 10px;
   border-radius: 20px;
   box-shadow: 0 2px 6px rgba(255, 82, 82, 0.4);
+  -webkit-user-select: none;
   user-select: none;
   white-space: nowrap;
 }
@@ -495,6 +496,7 @@ button:hover {
   border-radius: 16px;
   margin-top: 6px;
   display: inline-block;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -535,6 +537,7 @@ button:hover {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   align-items: center;
   justify-content: center;
@@ -793,7 +796,6 @@ footer {
 /* Responsive Image Handling */
 /*Andrew Mogbeyiromore W03*/
 @media screen and (max-width: 768px) {
-
   .product-grid img,
   .product-card img,
   .product-detail img {
@@ -871,8 +873,7 @@ footer {
 }
 
 .summary-label {
-  color: var(--secondary-color,
-      #4caf50);
+  color: var(--secondary-color, #4caf50);
   /* fallback to green if variable not set */
   font-weight: 500;
   margin-right: 0.5em;
@@ -1068,4 +1069,97 @@ input[type="email"] {
   cursor: pointer;
   width: 100%;
   max-width: 150px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+/* Hamburger menu styles for small screens */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0.5em 0 0;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 28px;
+  background: #222;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Hide menu-buttons by default on small screens */
+.menu-buttons {
+  display: none;
+}
+
+/* Show hamburger on small screens */
+/* Add a visible hamburger icon using emoji for small screens */
+.hamburger::before {
+  content: "🍔";
+  font-size: 2rem;
+  display: block;
+  text-align: center;
+  line-height: 36px;
+}
+.hamburger span {
+  display: none; /* Hide the original bars when emoji is used */
+}
+@media (max-width: 599px) {
+  .hamburger {
+    display: flex;
+  }
+  .menu-buttons.active {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1em;
+    border-radius: 8px;
+    z-index: 1001;
+  }
+}
+
+/* Show menu-buttons as row and hide hamburger on larger screens */
+@media (min-width: 600px) {
+  .menu-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .hamburger {
+    display: none;
+  }
+}
+
+.menu-btn {
+  text-decoration: none;
+  color: #222;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+.menu-btn:hover {
+  background: #f0f0f0;
 }
